@@ -1,0 +1,16 @@
+{
+  "name": "everli",
+  "version": "1.0.0",
+  "description": "reverse binary",
+  "main": "reverse_binary.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
