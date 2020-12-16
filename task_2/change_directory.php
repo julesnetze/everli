@@ -3,27 +3,30 @@ class Path {
 
     private string $current_directory;
 
-    function __construct(string $name_path) {
-        $this->current_directory = $name_path;
+    function __construct(string $name_path) { $this->current_directory = $name_path; }
+
+    public function getCurrentDirectory(): string { return $this->current_directory; }
+
+    public function changeDirectory(string $directory_change) {
+        $new_directory = explode('/', $this->current_directory);
+        $last = $this->extractLastElementInPath($directory_change);
+
+        array_splice($new_directory, -$this->extractNumberOfParentDirectories($directory_change));
+        if ($last != "..") array_push($new_directory, $last);
+
+        $this->current_directory = implode('/', $new_directory);
     }
 
-    public function getCurrentDirectory(): string
-    {
-        return $this->current_directory;
+    private function extractNumberOfParentDirectories(string $directory): int {
+        $directory_as_array = explode('/', $directory);
+        $parent_directories_count = array_count_values($directory_as_array)['..'];
+        return $parent_directories_count;
     }
 
-    public function changeDirectory(string $directory_to_change_to) {
-        $path_array = explode('/', $directory_to_change_to);
-        $parent_directories_count = array_count_values($path_array)['..'];
-
-        $current_directory = explode('/', $this->current_directory);
-        array_splice($current_directory, -$parent_directories_count);
-        if (end($path_array) != '..') {
-            array_push($current_directory, end($path_array));
-        }
-        $new_current_directory = implode('/', $current_directory);
-
-        $this->current_directory = $new_current_directory;
+    private function extractLastElementInPath(string $directory) {
+        $directory_as_array = explode('/', $directory);
+        $last_element = end($directory_as_array);
+        return $last_element;
     }
 }
 
