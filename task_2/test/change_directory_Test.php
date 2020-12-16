@@ -30,13 +30,28 @@ class ChangeDirectoryTest extends TestCase
         $this->assertSame('/a/b/x', $path->getCurrentDirectory());
     }
 
-
     public function testFourParentDirectoriesUpAndChangeDirectory() {
         $path = new Path('/a/b/c/d');
 
         $path->changeDirectory('../../../../x');
 
         $this->assertSame('/x', $path->getCurrentDirectory());
+    }
+
+    public function testThreeParentDirectoriesUpAndTwoDirectoryChanges() {
+        $path = new Path('/a/b/c/d');
+
+        $path->changeDirectory('../../x/../z');
+
+        $this->assertSame('/a/b/z', $path->getCurrentDirectory());
+    }
+
+    public function testTwoParentDirectoriesUpAndTwoDirectoryChanges() {
+        $path = new Path('/a/b/c/d');
+
+        $path->changeDirectory('../../x/z');
+
+        $this->assertSame('/a/b/x/z', $path->getCurrentDirectory());
     }
 }
 ?>
