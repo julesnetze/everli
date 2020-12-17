@@ -45,7 +45,6 @@ class HaversineCoverageTest(unittest.TestCase):
 
     def test_haversine_coverage_shoppers_with_multiple_locations(self):
         location = [locations[0], locations[1]]
-
         shoppers = [
             {'id': 'S1', 'lat': 45.46, 'lng': 11.03, 'enabled': True},
             {'id': 'S2', 'lat': 45.46, 'lng': 10.12, 'enabled': True},
@@ -61,7 +60,7 @@ class HaversineCoverageTest(unittest.TestCase):
 
     def test_all_shoppers_with_all_locations(self):
         shoppers_coverage = haversine_coverage(locations, shoppers)
-        
+
         expected = [
             {'shopper_id': 'S1', 'coverage': 75},
             {'shopper_id': 'S3', 'coverage': 25},
