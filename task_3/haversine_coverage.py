@@ -4,26 +4,23 @@ from operator import itemgetter
 sort_test = sorted
 
 def haversine_coverage(locations, shoppers):
-    shoppers_list = []
+    shoppers_coverage = []
 
     for shopper in shoppers:
-        if shopper.get('enabled') == False: continue
-
-        lat_shopper = shopper['lat']
-        lng_shopper = shopper['lng']
-
-        locations_covered = 0
-
-        for location in locations:
-            lat_location = location['lat']
-            lng_location = location['lng']
-            if (haversine((lat_location, lng_location), (lat_shopper, lng_shopper)) < 10.0):
-                locations_covered += 1
-        
-        shopper_dict = {'shopper_id': shopper['id'], 'coverage': int(locations_covered/len(locations) * 100) }
-        shoppers_list.append(shopper_dict)
+        if shopper['enabled'] == False: continue
+        shopper_coordinates = (shopper['lat'], shopper['lng'])
+        shopper_coverage = {'shopper_id': shopper['id'], 'coverage': calculate_locations_covered(locations, shopper_coordinates)}
+        shoppers_coverage.append(shopper_coverage)
     
-    return sort_test(shoppers_list, key=itemgetter('coverage'), reverse=True)
+    return sort_test(shoppers_coverage, key=itemgetter('coverage'), reverse=True)
 
+def calculate_locations_covered(locations, shopper_coordinates):
+    locations_covered = 0
 
+    for location in locations:
+        distance = haversine((location['lat'], location['lng']), (shopper_coordinates[0], shopper_coordinates[1]))
+        if (distance < 10.0):
+            locations_covered += 1
+
+    return int(locations_covered / len(locations) * 100)
 
