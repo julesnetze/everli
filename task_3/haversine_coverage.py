@@ -1,8 +1,6 @@
 from haversine import haversine
 from operator import itemgetter
 
-sort_test = sorted
-
 def haversine_coverage(locations, shoppers):
     shoppers_coverage = []
 
@@ -12,7 +10,7 @@ def haversine_coverage(locations, shoppers):
         shopper_coverage = {'shopper_id': shopper['id'], 'coverage': calculate_locations_covered(locations, shopper_coordinates)}
         shoppers_coverage.append(shopper_coverage)
     
-    return sort_test(shoppers_coverage, key=itemgetter('coverage'), reverse=True)
+    return sorted(shoppers_coverage, key=itemgetter('coverage'), reverse=True)
 
 def calculate_locations_covered(locations, shopper_coordinates):
     locations_covered = 0
@@ -23,4 +21,3 @@ def calculate_locations_covered(locations, shopper_coordinates):
             locations_covered += 1
 
     return int(locations_covered / len(locations) * 100)
-
