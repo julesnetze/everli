@@ -1,3 +1,5 @@
+from haversine import haversine
+
 locations = [
     	  {'id': 1000, 'zip_code': '37069', 'lat': 45.35, 'lng': 10.84},
     	  {'id': 1001, 'zip_code': '37121', 'lat': 45.44, 'lng': 10.99},
@@ -14,3 +16,4 @@ shoppers = [
     {'id': 'S6', 'lat': 45.42, 'lng': 10.81, 'enabled': True},
     {'id': 'S7', 'lat': 45.34, 'lng': 10.94, 'enabled': True},
 ]
+

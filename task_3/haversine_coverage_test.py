@@ -2,7 +2,7 @@ import unittest
 
 class HaversineCoverageTest(unittest.TestCase):
 
-    def test_something(self):
+    def test_haversine(self):
         self.assertEqual(1, 2)
 
 
